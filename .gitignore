@@ -1,0 +1,7 @@
+resources/
+/server/nbproject/private/
+/client/nbproject/private/
+/common/nbproject/private/
+/common/build/
+/common/dist/
+/server/build/
