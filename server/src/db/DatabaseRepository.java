@@ -15,14 +15,13 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  *
  * @author Milos
  */
 public class DatabaseRepository {
 
-    public IDomainEntity save(IDomainEntity ide) throws Exception{
+    public IDomainEntity save(IDomainEntity ide) throws Exception {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO ")
@@ -34,37 +33,41 @@ public class DatabaseRepository {
                 .append("(")
                 .append(ide.getColumnValuesForInsert())
                 .append(")");
-        
+
         String query = sb.toString();
         Statement s = connection.createStatement();
-        s.executeUpdate(query);
-        
-        if(ide.isIdAutoincrement()){
+
+        if (ide.isIdAutoincrement()) {
+            s.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = s.getGeneratedKeys();
+            rs.next();
             Long id = rs.getLong(1);
             ide.setAutoincrementId(id);
+        } else {
+            s.executeUpdate(query);
         }
-        return findById(ide);
         
-
+        return findById(ide);
     }
-    
-    public void startTransaction() throws Exception{
+
+    public void startTransaction() throws Exception {
         DatabaseConnection.getInstance().getConnection().setAutoCommit(false);
     }
-    
-    public void commitTransaction() throws Exception{
+
+    public void commitTransaction() throws Exception {
         DatabaseConnection.getInstance().getConnection().commit();
     }
-    
-    public void rollbackTransaction() throws Exception{
+
+    public void rollbackTransaction() throws Exception {
         DatabaseConnection.getInstance().getConnection().rollback();
     }
 
-    private IDomainEntity findById(IDomainEntity ide) {
-        // TODO
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private IDomainEntity findById(IDomainEntity ide) throws Exception {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "SELECT * FROM " + ide.getTableName() + " WHERE " + ide.getWhereCondition();
+        Statement s = connection.createStatement();
+        ResultSet rs = s.executeQuery(query);
+        return rs.next() ? ide.getNewRecord(rs) : null;
     }
-    
-    
+
 }

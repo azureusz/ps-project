@@ -20,8 +20,6 @@ public interface IDomainEntity {
 
     public String getTableName();
 
-    public String getNameByColumn(int column);
-
     public String getWhereCondition();
     
     public IDomainEntity getNewRecord(ResultSet rs) throws SQLException;

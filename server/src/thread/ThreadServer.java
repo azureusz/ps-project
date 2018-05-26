@@ -27,8 +27,6 @@ public class ThreadServer extends Thread{
         clients = new ArrayList<>();
     }
     
-    
-    
     @Override
     public void run() {
         while(!isInterrupted()){
