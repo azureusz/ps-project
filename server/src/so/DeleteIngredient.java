@@ -13,7 +13,7 @@ import so.general.AbstractGenericOperation;
  *
  * @author Milos
  */
-public class LoadAllRecipes extends AbstractGenericOperation{
+public class DeleteIngredient extends AbstractGenericOperation{
 
     @Override
     protected void validate(IDomainEntity ide) throws Exception {
@@ -21,7 +21,7 @@ public class LoadAllRecipes extends AbstractGenericOperation{
 
     @Override
     protected void execute(IDomainEntity ide) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(!db.delete(ide)) throw new Exception("Ingredient could not be deleted.");
     }
 
     @Override

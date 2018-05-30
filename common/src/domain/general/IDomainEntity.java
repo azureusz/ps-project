@@ -17,6 +17,8 @@ public interface IDomainEntity {
     public String getColumnNamesForInsert();
     
     public String getColumnValuesForInsert();
+    
+    public String getColumnValuesForUpdate();
 
     public String getTableName();
 

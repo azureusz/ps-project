@@ -7,13 +7,8 @@ package db;
 
 import domain.general.IDomainEntity;
 import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -36,7 +31,7 @@ public class DatabaseRepository {
 
         String query = sb.toString();
         Statement s = connection.createStatement();
-
+        System.out.println("Save: " + query);
         if (ide.isIdAutoincrement()) {
             s.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = s.getGeneratedKeys();
@@ -48,6 +43,22 @@ public class DatabaseRepository {
         }
         
         return findById(ide);
+    }
+    
+    public boolean update(IDomainEntity ide) throws Exception {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "UPDATE " + ide.getTableName() + " SET " + ide.getColumnValuesForUpdate() + " WHERE " + ide.getWhereCondition();
+        Statement st = connection.prepareStatement(query);
+        int count = st.executeUpdate(query);
+        return count > 0;
+    }
+    
+    public boolean delete(IDomainEntity ide) throws Exception {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "DELETE FROM " + ide.getTableName()+ " WHERE " + ide.getWhereCondition();
+        Statement st = connection.prepareStatement(query);
+        int count = st.executeUpdate(query);
+        return count > 0;
     }
 
     public void startTransaction() throws Exception {
@@ -65,6 +76,7 @@ public class DatabaseRepository {
     private IDomainEntity findById(IDomainEntity ide) throws Exception {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String query = "SELECT * FROM " + ide.getTableName() + " WHERE " + ide.getWhereCondition();
+        System.out.println("Find: " + query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
         return rs.next() ? ide.getNewRecord(rs) : null;

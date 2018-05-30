@@ -89,5 +89,10 @@ public class RecipeStep implements IDomainEntity{
     public void setAutoincrementId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String getColumnValuesForUpdate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

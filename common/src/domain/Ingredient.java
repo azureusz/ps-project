@@ -83,5 +83,10 @@ public class Ingredient implements IDomainEntity{
     public void setAutoincrementId(Long id) {
         this.id = id;
     }
+
+    @Override
+    public String getColumnValuesForUpdate() {
+        return "id = " + id + ", naziv = '" + name + "'";
+    }
     
 }

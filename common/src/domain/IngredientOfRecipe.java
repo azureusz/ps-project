@@ -83,13 +83,13 @@ public class IngredientOfRecipe implements IDomainEntity{
 
     @Override
     public String getWhereCondition() {
-        return "recept_id = " + recipeId + "AND sastojak_id = " + ingredient.getId();
+        return "recept_id = " + recipeId + " AND sastojak_id = " + ingredient.getId();
     }
 
     @Override
     public IDomainEntity getNewRecord(ResultSet rs) throws SQLException {
         return new IngredientOfRecipe(rs.getLong("recept_id"),
-                new Ingredient(rs.getLong("id"), ""), rs.getInt("kolicina"),
+                new Ingredient(rs.getLong("sastojak_id"), ""), rs.getInt("kolicina"),
                 new MeasureUnit(rs.getLong("merna_jedinica_id"), ""));
     }
 
@@ -100,6 +100,11 @@ public class IngredientOfRecipe implements IDomainEntity{
 
     @Override
     public void setAutoincrementId(Long id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public String getColumnValuesForUpdate() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

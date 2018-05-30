@@ -57,8 +57,6 @@ public class Recipe implements IDomainEntity{
         steps = new ArrayList<>();
     }
     
-    
-    
     @Override
     public String getColumnNamesForInsert() {
         return "id, datum, naziv, potrebno_vreme, kategorija_id";
@@ -96,5 +94,69 @@ public class Recipe implements IDomainEntity{
     public void setAutoincrementId(Long id) {
         this.id = id;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public int getTimeRequired() {
+        return timeRequired;
+    }
+
+    public void setTimeRequired(int timeRequired) {
+        this.timeRequired = timeRequired;
+    }
+
+    public RecipeCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(RecipeCategory category) {
+        this.category = category;
+    }
+
+    public List<IngredientOfRecipe> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<IngredientOfRecipe> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    public List<RecipeStep> getSteps() {
+        return steps;
+    }
+
+    public void setSteps(List<RecipeStep> steps) {
+        this.steps = steps;
+    }
+
+    @Override
+    public String getColumnValuesForUpdate() {
+        return "id = " + id + ", datum = '" + Date.valueOf(dateCreated) + "', naziv = '" + title + "', potrebno_vreme = " + timeRequired + ", kategorija_id = " + category.getId();
+    
+    }
+    
+    
     
 }

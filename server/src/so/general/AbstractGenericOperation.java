@@ -7,8 +7,7 @@ package so.general;
 
 import db.DatabaseRepository;
 import domain.general.IDomainEntity;
-
-
+import java.util.List;
 
 /**
  *
@@ -18,9 +17,6 @@ public abstract class AbstractGenericOperation {
 
     protected DatabaseRepository db;
 
-//    public AbstractGenericOperation(DatabaseRepository db) {
-//        this.db = db;
-//    }
     public AbstractGenericOperation() {
         db = new DatabaseRepository();
     }
@@ -35,10 +31,21 @@ public abstract class AbstractGenericOperation {
                 commitTransaction();
             } catch (Exception e) {
                 rollbackTransaction();//rollback se radi samo ako je transakcija otvorena
+                e.printStackTrace();
                 throw new Exception("Error: " + e.getMessage());
             }
         } catch (Exception e) {
             throw e;
+        }
+
+    }
+
+    public void templateExecute(IDomainEntity ide, List<IDomainEntity> ides) throws Exception {
+
+        try {
+            execute(ide, ides);
+        } catch (Exception e) {
+            throw new Exception("Error: " + e.getMessage());
         }
 
     }
@@ -51,6 +58,8 @@ public abstract class AbstractGenericOperation {
 
     protected abstract void execute(IDomainEntity ide) throws Exception;
 
+    protected abstract void execute(IDomainEntity ide, List<IDomainEntity> ides) throws Exception;
+    
     private void commitTransaction() throws Exception {
         db.commitTransaction();
     }
