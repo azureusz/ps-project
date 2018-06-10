@@ -11,12 +11,16 @@ import domain.MeasureUnit;
 import domain.Recipe;
 import domain.RecipeCategory;
 import domain.RecipeStep;
+import domain.general.IDomainEntity;
+import form.FServer;
+import form.controller.FormController;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import so.DeleteRecipeCategory;
+import javax.swing.JFrame;
+import so.DeleteRecipe;
+import so.LoadAllRecipes;
 import so.SaveRecipe;
 import so.general.AbstractGenericOperation;
 
@@ -27,11 +31,11 @@ import so.general.AbstractGenericOperation;
 public class Start {
 
     public static void main(String[] args) {
-        //JFrame form = new FServer();
-        //form.setVisible(true);
-        testSaveRecipe();
+        FormController fc = new FormController(new FServer());
+        fc.initForm();
+        //testSaveRecipe();
         //testDelete();
-        
+        //testLoadAll();
     }
 
     private static void testSaveRecipe() {
@@ -58,9 +62,21 @@ public class Start {
 
     private static void testDelete() {
         try {
-            RecipeCategory rc = new RecipeCategory(1l, "Kolaci");
-            AbstractGenericOperation drc = new DeleteRecipeCategory();
-            drc.templateExecute(rc);
+            Recipe recipe = new Recipe(2l, LocalDate.now(), "New recipe", 10, new RecipeCategory());
+            AbstractGenericOperation drc = new DeleteRecipe();
+            drc.templateExecute(recipe);
+        } catch (Exception ex) {
+            
+            System.out.println("error:" + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    private static void testLoadAll() {
+        try {
+            List<IDomainEntity> recipes = new ArrayList<>();
+            AbstractGenericOperation drc = new LoadAllRecipes();
+            drc.templateExecute(new Recipe(),recipes);
         } catch (Exception ex) {
             
             System.out.println("error:" + ex.getMessage());

@@ -12,12 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Milos
  */
-public class ThreadServer extends Thread{
+public class ThreadServer extends Thread {
 
     ServerSocket serverSocket;
     List<Thread> clients;
@@ -26,24 +27,29 @@ public class ThreadServer extends Thread{
         serverSocket = new ServerSocket(port);
         clients = new ArrayList<>();
     }
-    
+
     @Override
     public void run() {
-        while(!isInterrupted()){
-            try {
+        try {
+            while (!isInterrupted()) {
+
                 System.out.println("Waiting for a client");
                 Socket socket = serverSocket.accept();
                 System.out.println("Client connected");
+                
                 Thread client = new ThreadClient(socket);
                 client.start();
                 clients.add(client);
                 //New client arrived
-                
-            } catch (IOException ex) {
-                Logger.getLogger(ThreadServer.class.getName()).log(Level.SEVERE, null, ex);
+
             }
-            
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Server stopped.");
         }
     }
-    
+
+    public void stopServer() throws IOException {
+        serverSocket.close();
+    }
+
 }

@@ -5,3 +5,4 @@ resources/
 /common/build/
 /common/dist/
 /server/build/
+/client/build/

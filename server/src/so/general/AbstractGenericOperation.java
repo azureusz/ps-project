@@ -25,7 +25,7 @@ public abstract class AbstractGenericOperation {
         try {
             validate(ide);
             try {
-                //validate(ide);
+                validate(ide);
                 startTransaction();
                 execute(ide);
                 commitTransaction();

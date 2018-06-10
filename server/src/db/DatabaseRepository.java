@@ -9,6 +9,8 @@ import domain.general.IDomainEntity;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -73,13 +75,39 @@ public class DatabaseRepository {
         DatabaseConnection.getInstance().getConnection().rollback();
     }
 
-    private IDomainEntity findById(IDomainEntity ide) throws Exception {
+    public IDomainEntity findById(IDomainEntity ide) throws Exception {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String query = "SELECT * FROM " + ide.getTableName() + " WHERE " + ide.getWhereCondition();
         System.out.println("Find: " + query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
         return rs.next() ? ide.getNewRecord(rs) : null;
+    }
+    
+    public List<IDomainEntity> findAll(IDomainEntity ide) throws Exception {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "SELECT * FROM " + ide.getTableName();
+        System.out.println("Find all: " + query);
+        Statement s = connection.createStatement();
+        ResultSet rs = s.executeQuery(query);
+        List<IDomainEntity> list = new ArrayList<>();
+        while(rs.next()){
+            list.add(ide.getNewRecord(rs));
+        }
+        return list;
+    }
+    
+    public List<IDomainEntity> findAllCustom(IDomainEntity ide, String whereCondition) throws Exception {
+        Connection connection = DatabaseConnection.getInstance().getConnection();
+        String query = "SELECT * FROM " + ide.getTableName() + " WHERE " + whereCondition;
+        System.out.println("Find all custom where: " + query);
+        Statement s = connection.createStatement();
+        ResultSet rs = s.executeQuery(query);
+        List<IDomainEntity> list = new ArrayList<>();
+        while(rs.next()){
+            list.add(ide.getNewRecord(rs));
+        }
+        return list;
     }
 
 }

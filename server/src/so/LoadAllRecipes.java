@@ -5,6 +5,11 @@
  */
 package so;
 
+import domain.Ingredient;
+import domain.IngredientOfRecipe;
+import domain.MeasureUnit;
+import domain.Recipe;
+import domain.RecipeStep;
 import domain.general.IDomainEntity;
 import java.util.List;
 import so.general.AbstractGenericOperation;
@@ -26,7 +31,28 @@ public class LoadAllRecipes extends AbstractGenericOperation{
 
     @Override
     protected void execute(IDomainEntity ide, List<IDomainEntity> ides) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ides = db.findAll(ide);
+        
+        for (IDomainEntity ide1 : ides) {
+            Recipe recipe = (Recipe)ide1;
+            loadSteps(recipe);
+            loadIngredients(recipe);
+        }
+        
+    }
+
+    private void loadSteps(Recipe recipe) throws Exception {
+        List<RecipeStep> steps = (List<RecipeStep>)(List<?>)db.findAllCustom(new RecipeStep(), "recept_id=" + recipe.getId());
+        recipe.setSteps(steps);
+    }
+
+    private void loadIngredients(Recipe recipe) throws Exception {
+        List<IngredientOfRecipe> ingredients = (List<IngredientOfRecipe>)(List<?>)db.findAllCustom(new IngredientOfRecipe(), "recept_id=" + recipe.getId());
+        for (IngredientOfRecipe ingredient : ingredients) {
+            ingredient.setIngredient((Ingredient) db.findById(ingredient.getIngredient()));
+            ingredient.setMeasureUnit((MeasureUnit) db.findById(ingredient.getMeasureUnit()));
+        }
+        recipe.setIngredients(ingredients);
     }
     
 }

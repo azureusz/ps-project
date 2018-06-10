@@ -10,5 +10,11 @@ package transfer.util;
  * @author Milos
  */
 public interface IOperation {
-    public static final int HI = 1;
+    public static final int SAVE_RECIPE = 1;
+    public static final int SAVE_INGREDIENT = 2;
+    public static final int SAVE_RECIPE_CATEGORY = 3;
+    public static final int DELETE_RECIPE = 4;
+    public static final int DELETE_INGREDIENT = 5;
+    public static final int DELETE_RECIPE_CATEGORY = 6;
+    public static final int LOAD_ALL_RECIPES = 7;
 }

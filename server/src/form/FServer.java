@@ -8,6 +8,8 @@ package form;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import thread.ThreadClock;
 import thread.ThreadServer;
@@ -23,7 +25,6 @@ public class FServer extends javax.swing.JFrame {
      */
     public FServer() {
         initComponents();
-        startClock();
     }
 
     /**
@@ -40,6 +41,7 @@ public class FServer extends javax.swing.JFrame {
         jLblClock = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Server");
 
         jBtnStartServer.setText("Start server");
         jBtnStartServer.addActionListener(new java.awt.event.ActionListener() {
@@ -83,17 +85,7 @@ public class FServer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnStartServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnStartServerActionPerformed
-        if(server == null || !server.isAlive()){
-            try {
-                server = new ThreadServer(9009);
-                server.start();
-                JOptionPane.showMessageDialog(this, "Server started");
-            } catch (IOException ex) {
-                Logger.getLogger(FServer.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }else{
-            JOptionPane.showMessageDialog(this, "Server has already been started");
-        }
+        
     }//GEN-LAST:event_jBtnStartServerActionPerformed
 
  
@@ -103,12 +95,18 @@ public class FServer extends javax.swing.JFrame {
     private javax.swing.JButton jBtnStopServer;
     private javax.swing.JLabel jLblClock;
     // End of variables declaration//GEN-END:variables
-    private Thread clock;
-    private Thread server;
     
-    
-    private void startClock() {
-        clock = new ThreadClock(jLblClock);
-        clock.start();
+
+    public JButton getjBtnStartServer() {
+        return jBtnStartServer;
     }
+
+    public JButton getjBtnStopServer() {
+        return jBtnStopServer;
+    }
+
+    public JLabel getjLblClock() {
+        return jLblClock;
+    }
+    
 }

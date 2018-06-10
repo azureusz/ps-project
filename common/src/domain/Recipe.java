@@ -6,6 +6,7 @@
 package domain;
 
 import domain.general.IDomainEntity;
+import java.io.Serializable;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @author Milos
  */
-public class Recipe implements IDomainEntity{
+public class Recipe implements IDomainEntity, Serializable{
 
     private Long id;
     private LocalDate dateCreated;

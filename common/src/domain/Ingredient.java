@@ -6,6 +6,7 @@
 package domain;
 
 import domain.general.IDomainEntity;
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,7 +14,7 @@ import java.sql.SQLException;
  *
  * @author Milos
  */
-public class Ingredient implements IDomainEntity{
+public class Ingredient implements IDomainEntity, Serializable{
 
     private Long id;
     private String name;
