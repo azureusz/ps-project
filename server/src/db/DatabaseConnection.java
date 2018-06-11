@@ -19,7 +19,7 @@ public class DatabaseConnection {
     
     private DatabaseConnection() throws Exception{
 
-        DatabaseResources dbr = new DatabaseResources();
+        Config dbr = new Config();
         connection = DriverManager.getConnection(dbr.getUrl(), dbr.getUsername(), dbr.getPassword());
         System.out.println("Db connection successful!");
     }

@@ -44,7 +44,7 @@ public class ThreadServer extends Thread {
 
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(null, "Server stopped.");
+            
         }
     }
 
