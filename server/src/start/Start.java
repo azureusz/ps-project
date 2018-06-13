@@ -18,7 +18,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.JFrame;
 import so.DeleteRecipe;
 import so.LoadAllRecipes;
 import so.SaveRecipe;

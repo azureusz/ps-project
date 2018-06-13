@@ -5,6 +5,7 @@
  */
 package start;
 
+import controller.MainFormController;
 import domain.Ingredient;
 import domain.IngredientOfRecipe;
 import domain.MeasureUnit;
@@ -30,9 +31,11 @@ import transfer.util.IOperation;
 public class Start {
 
     public static void main(String[] args) {
+        MainFormController mainCtrl = new MainFormController();
+        mainCtrl.initForm();
 //        JFrame fmain = new FMain();
 //        fmain.setVisible(true);  
-        testSaveRecipe();
+        //testSaveRecipe();
     }
 
     private static void testSaveRecipe() {

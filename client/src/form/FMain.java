@@ -5,6 +5,10 @@
  */
 package form;
 
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Milos
@@ -27,31 +31,28 @@ public class FMain extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTxtStatus = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jPanelMain = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemAddNew = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemShowAllRecipes = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItemShowAllIngredients = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItemShowAllCategories = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTxtStatus.setEditable(false);
-
-        jLabel1.setText("Status: ");
+        setResizable(false);
 
         javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
         jPanelMain.setLayout(jPanelMainLayout);
         jPanelMainLayout.setHorizontalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 1056, Short.MAX_VALUE)
         );
         jPanelMainLayout.setVerticalGroup(
             jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
+            .addGap(0, 562, Short.MAX_VALUE)
         );
 
         jMenu1.setText("Recipes");
@@ -59,17 +60,24 @@ public class FMain extends javax.swing.JFrame {
         jMenuItemAddNew.setText("Add new");
         jMenu1.add(jMenuItemAddNew);
 
-        jMenuItem1.setText("Show all...");
-        jMenu1.add(jMenuItem1);
+        jMenuItemShowAllRecipes.setText("Show all...");
+        jMenu1.add(jMenuItemShowAllRecipes);
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Sastojci");
+        jMenu2.setText("Ingredients");
 
-        jMenuItem2.setText("Show all...");
-        jMenu2.add(jMenuItem2);
+        jMenuItemShowAllIngredients.setText("Show all...");
+        jMenu2.add(jMenuItemShowAllIngredients);
 
         jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Categories");
+
+        jMenuItemShowAllCategories.setText("Show all...");
+        jMenu3.add(jMenuItemShowAllCategories);
+
+        jMenuBar1.add(jMenu3);
 
         setJMenuBar(jMenuBar1);
 
@@ -77,22 +85,12 @@ public class FMain extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTxtStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 988, Short.MAX_VALUE)
-                .addContainerGap())
             .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanelMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTxtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
                 .addContainerGap())
         );
 
@@ -101,14 +99,41 @@ public class FMain extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItemAddNew;
+    private javax.swing.JMenuItem jMenuItemShowAllCategories;
+    private javax.swing.JMenuItem jMenuItemShowAllIngredients;
+    private javax.swing.JMenuItem jMenuItemShowAllRecipes;
     private javax.swing.JPanel jPanelMain;
-    private javax.swing.JTextField jTxtStatus;
     // End of variables declaration//GEN-END:variables
+
+    public JMenuItem getjMenuItemAddNew() {
+        return jMenuItemAddNew;
+    }
+
+    public JPanel getjPanelMain() {
+        return jPanelMain;
+    }
+
+    public JMenuItem getjMenuItemShowAllIngredients() {
+        return jMenuItemShowAllIngredients;
+    }
+
+    public JMenuItem getjMenuItemShowAllRecipes() {
+        return jMenuItemShowAllRecipes;
+    }
+
+    public void setjPanelMain(JPanel jPanelMain) {
+        this.jPanelMain = jPanelMain;
+    }
+
+    public JMenuItem getjMenuItemShowAllCategories() {
+        return jMenuItemShowAllCategories;
+    }
+
+    
+    
 }
