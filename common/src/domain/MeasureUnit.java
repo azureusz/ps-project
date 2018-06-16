@@ -84,5 +84,11 @@ public class MeasureUnit implements IDomainEntity, Serializable{
     public String getColumnValuesForUpdate() {
         return "id = " + id + ", naziv = '" + name + "'";
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+    
     
 }

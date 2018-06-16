@@ -47,7 +47,7 @@ public class RecipeCategory implements IDomainEntity, Serializable{
 
     @Override
     public String toString() {
-        return "RecipeCategory{" + "id=" + id + ", name=" + name + '}';
+        return name;
     }
 
     @Override

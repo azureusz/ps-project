@@ -6,6 +6,7 @@
 package thread;
 
 import domain.Ingredient;
+import domain.MeasureUnit;
 import domain.Recipe;
 import domain.RecipeCategory;
 import domain.general.IDomainEntity;
@@ -20,6 +21,9 @@ import java.util.logging.Logger;
 import so.DeleteIngredient;
 import so.DeleteRecipe;
 import so.DeleteRecipeCategory;
+import so.LoadAllIngredients;
+import so.LoadAllMeasureUnits;
+import so.LoadAllRecipeCategories;
 import so.LoadAllRecipes;
 import so.SaveIngredient;
 import so.SaveRecipe;
@@ -51,7 +55,7 @@ public class ThreadClient extends Thread {
             output.flush();
             while (!isInterrupted()) {
                 try {
-                    
+
                     RequestObject request = (RequestObject) input.readObject();
                     ResponseObject responseObject = new ResponseObject();
                     switch (request.getOperation()) {
@@ -67,9 +71,9 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                         case IOperation.SAVE_INGREDIENT:
                             Ingredient ingredient = (Ingredient) request.getData();
                             try {
@@ -82,9 +86,9 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                         case IOperation.SAVE_RECIPE_CATEGORY:
                             RecipeCategory category = (RecipeCategory) request.getData();
                             try {
@@ -97,9 +101,9 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                         case IOperation.LOAD_ALL_RECIPES:
                             try {
                                 List<IDomainEntity> recipes = new ArrayList<>();
@@ -112,9 +116,54 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
+                            break;
+
+                        case IOperation.LOAD_ALL_INGREDIENTS:
+                            try {
+                                List<IDomainEntity> ingredients = new ArrayList<>();
+                                AbstractGenericOperation loadAll = new LoadAllIngredients();
+                                loadAll.templateExecute(new Ingredient(), ingredients);
+                                responseObject.setCode(IStatus.OK);
+                                responseObject.setMessage("Ingredients loaded succesfully!");
+                                responseObject.setData(ingredients);
+                            } catch (Exception e) {
+                                responseObject.setCode(IStatus.ERROR);
+                                responseObject.setMessage(e.getMessage());
+                            }
+
                             break;
                             
+                        case IOperation.LOAD_ALL_MEASURE_UNITS:
+                            try {
+                                List<IDomainEntity> measureUnits = new ArrayList<>();
+                                AbstractGenericOperation loadAll = new LoadAllMeasureUnits();
+                                loadAll.templateExecute(new MeasureUnit(), measureUnits);
+                                responseObject.setCode(IStatus.OK);
+                                responseObject.setMessage("Measure units loaded succesfully!");
+                                responseObject.setData(measureUnits);
+                            } catch (Exception e) {
+                                responseObject.setCode(IStatus.ERROR);
+                                responseObject.setMessage(e.getMessage());
+                            }
+
+                            break;
+                            
+                        case IOperation.LOAD_ALL_RECIPE_CATEGORIES:
+                            try {
+                                List<IDomainEntity> categories = new ArrayList<>();
+                                AbstractGenericOperation loadAll = new LoadAllRecipeCategories();
+                                loadAll.templateExecute(new RecipeCategory(), categories);
+                                responseObject.setCode(IStatus.OK);
+                                responseObject.setMessage("Recipe categories loaded succesfully!");
+                                responseObject.setData(categories);
+                            } catch (Exception e) {
+                                responseObject.setCode(IStatus.ERROR);
+                                responseObject.setMessage(e.getMessage());
+                            }
+
+                            break;
+
                         case IOperation.DELETE_RECIPE:
                             Recipe delRecipe = (Recipe) request.getData();
                             try {
@@ -127,9 +176,9 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                         case IOperation.DELETE_INGREDIENT:
                             Ingredient delIngredient = (Ingredient) request.getData();
                             try {
@@ -142,9 +191,9 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                         case IOperation.DELETE_RECIPE_CATEGORY:
                             RecipeCategory delRecipeCategory = (RecipeCategory) request.getData();
                             try {
@@ -157,11 +206,11 @@ public class ThreadClient extends Thread {
                                 responseObject.setCode(IStatus.ERROR);
                                 responseObject.setMessage(e.getMessage());
                             }
-                            
+
                             break;
-                            
+
                     }
-                    
+
                     output.writeObject(responseObject);
                     output.flush();
                 } catch (Exception e) {

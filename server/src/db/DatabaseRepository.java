@@ -84,17 +84,15 @@ public class DatabaseRepository {
         return rs.next() ? ide.getNewRecord(rs) : null;
     }
     
-    public List<IDomainEntity> findAll(IDomainEntity ide) throws Exception {
+    public void findAll(IDomainEntity ide, List<IDomainEntity> ides) throws Exception {
         Connection connection = DatabaseConnection.getInstance().getConnection();
         String query = "SELECT * FROM " + ide.getTableName();
         System.out.println("Find all: " + query);
         Statement s = connection.createStatement();
         ResultSet rs = s.executeQuery(query);
-        List<IDomainEntity> list = new ArrayList<>();
         while(rs.next()){
-            list.add(ide.getNewRecord(rs));
+            ides.add(ide.getNewRecord(rs));
         }
-        return list;
     }
     
     public List<IDomainEntity> findAllCustom(IDomainEntity ide, String whereCondition) throws Exception {

@@ -47,7 +47,7 @@ public class Ingredient implements IDomainEntity, Serializable{
 
     @Override
     public String toString() {
-        return "Ingredient{" + "id=" + id + ", name=" + name + '}';
+        return name;
     }
     
     @Override
@@ -89,5 +89,6 @@ public class Ingredient implements IDomainEntity, Serializable{
     public String getColumnValuesForUpdate() {
         return "id = " + id + ", naziv = '" + name + "'";
     }
+    
     
 }

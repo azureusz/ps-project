@@ -31,7 +31,7 @@ public class LoadAllRecipes extends AbstractGenericOperation{
 
     @Override
     protected void execute(IDomainEntity ide, List<IDomainEntity> ides) throws Exception {
-        ides = db.findAll(ide);
+        db.findAll(ide, ides);
         
         for (IDomainEntity ide1 : ides) {
             Recipe recipe = (Recipe)ide1;
