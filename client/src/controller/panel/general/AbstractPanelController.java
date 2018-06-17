@@ -6,9 +6,12 @@
 package controller.panel.general;
 
 import form.FMain;
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JPanel;
+import transfer.request.RequestObject;
+import transfer.response.ResponseObject;
 
 /**
  *
@@ -37,5 +40,9 @@ public abstract class AbstractPanelController {
         this.form.setContentPane(panel);
     }
     
+    protected ResponseObject performRequest(RequestObject ro) throws IOException, ClassNotFoundException{
+        out.writeObject(ro);
+        return (ResponseObject) in.readObject();
+    }
     
 }

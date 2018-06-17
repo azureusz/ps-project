@@ -9,6 +9,7 @@ import domain.Ingredient;
 import domain.IngredientOfRecipe;
 import domain.MeasureUnit;
 import domain.Recipe;
+import domain.RecipeCategory;
 import domain.RecipeStep;
 import domain.general.IDomainEntity;
 import java.util.List;
@@ -35,6 +36,7 @@ public class LoadAllRecipes extends AbstractGenericOperation{
         
         for (IDomainEntity ide1 : ides) {
             Recipe recipe = (Recipe)ide1;
+            recipe.setCategory((RecipeCategory) db.findById(recipe.getCategory()));
             loadSteps(recipe);
             loadIngredients(recipe);
         }

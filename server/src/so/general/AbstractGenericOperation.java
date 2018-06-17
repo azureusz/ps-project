@@ -30,7 +30,7 @@ public abstract class AbstractGenericOperation {
                 execute(ide);
                 commitTransaction();
             } catch (Exception e) {
-                rollbackTransaction();//rollback se radi samo ako je transakcija otvorena
+                rollbackTransaction();
                 e.printStackTrace();
                 throw new Exception("Error: " + e.getMessage());
             }

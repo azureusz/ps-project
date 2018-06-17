@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.panel;
+package controller.panel.recipe;
 
 import controller.panel.general.AbstractPanelController;
 import domain.Ingredient;
@@ -107,6 +107,13 @@ public class AddNewRecipePanelController extends AbstractPanelController {
             recipe.getIngredients().add(ior);
             rerenderIngredients();
         });
+        
+        this.panel.getJbtnRemoveLastIngredient().addActionListener((e) -> {
+            if(recipe.getIngredients().size() != 0){
+                recipe.getIngredients().remove(recipe.getIngredients().size() - 1);
+                rerenderIngredients();
+            }
+        });
     }
 
     private void addStepsActionListeners() {
@@ -119,6 +126,13 @@ public class AddNewRecipePanelController extends AbstractPanelController {
             panel.getJtxtAreaStep().setText("");
             recipe.getSteps().add(new RecipeStep(0l, 0l, text));
             rerenderSteps();
+        });
+        
+        this.panel.getJbtnRemoveLastStep().addActionListener((e) -> {
+            if(recipe.getSteps().size() != 0){
+                recipe.getSteps().remove(recipe.getSteps().size() -1);
+                rerenderSteps();
+            }
         });
     }
 
@@ -154,7 +168,6 @@ public class AddNewRecipePanelController extends AbstractPanelController {
             if (res.getCode() == IStatus.OK) {
                 List<MeasureUnit> measureUnits = (List<MeasureUnit>) res.getData();
                 for (MeasureUnit measureUnit : measureUnits) {
-                    System.out.println(measureUnit);
                     this.panel.getJcbMeasureUnits().addItem(measureUnit);
                 }
             }

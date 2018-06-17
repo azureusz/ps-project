@@ -51,6 +51,18 @@ public class RecipeCategory implements IDomainEntity, Serializable{
     }
 
     @Override
+    public boolean equals(Object obj) {
+        RecipeCategory other = null;
+        if(obj instanceof RecipeCategory){
+            other = (RecipeCategory) obj;
+        }
+        if(other.getName().equals(this.name)) return true;
+        return false;
+    }
+    
+    
+
+    @Override
     public String getColumnNamesForInsert() {
         return "id, naziv";
     }

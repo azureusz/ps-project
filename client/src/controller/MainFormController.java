@@ -6,10 +6,10 @@
 package controller;
 
 import util.ConfigUtil;
-import controller.panel.AddNewRecipePanelController;
+import controller.panel.recipe.AddNewRecipePanelController;
 import controller.panel.HomePanelController;
-import controller.panel.ShowAllCategoriesPanelController;
-import controller.panel.ShowAllRecipePanelController;
+import controller.panel.category.ShowAllCategoriesPanelController;
+import controller.panel.recipe.ShowAllRecipePanelController;
 import controller.panel.general.AbstractPanelController;
 import form.FMain;
 import form.panel.HomePanel;
