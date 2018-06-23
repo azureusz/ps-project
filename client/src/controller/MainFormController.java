@@ -11,9 +11,11 @@ import controller.panel.HomePanelController;
 import controller.panel.category.ShowAllCategoriesPanelController;
 import controller.panel.recipe.ShowAllRecipePanelController;
 import controller.panel.general.AbstractPanelController;
+import controller.panel.ingredient.ShowAllIngredientsPanelController;
 import form.FMain;
 import form.panel.HomePanel;
 import form.panel.category.ShowAllCategoriesPanel;
+import form.panel.ingredient.ShowAllIngredientsPanel;
 import form.panel.recipe.AddNewRecipePanel;
 import form.panel.recipe.ShowAllRecipePanel;
 import java.awt.event.ActionEvent;
@@ -53,6 +55,7 @@ public class MainFormController {
             setActionListeners();
             panelCtrl = new HomePanelController(form, out, in);
             panelCtrl.initPanel(new HomePanel());
+            form.setTitle("Recipe management");
             form.setVisible(true);
         } catch (IOException ex) {
             Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +65,7 @@ public class MainFormController {
     private void setActionListeners() {
         setRecipeMenuActionListeners();
         setCategoriesMenuActionListeners();
-
+        setIngredientsMenuActionListeners();
     }
 
     private void setRecipeMenuActionListeners() {
@@ -70,6 +73,7 @@ public class MainFormController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCtrl = new AddNewRecipePanelController(form, out, in);
+                form.setTitle("Add new recipe");
                 panelCtrl.initPanel(new AddNewRecipePanel());
             }
         });
@@ -78,6 +82,7 @@ public class MainFormController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCtrl = new ShowAllRecipePanelController(form, out, in);
+                form.setTitle("Show all recipes");
                 panelCtrl.initPanel(new ShowAllRecipePanel());
             }
         });
@@ -88,6 +93,7 @@ public class MainFormController {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelCtrl = new ShowAllCategoriesPanelController(form, out, in);
+                form.setTitle("Show all categories");
                 panelCtrl.initPanel(new ShowAllCategoriesPanel());
             }
         });
@@ -138,6 +144,17 @@ public class MainFormController {
         } else {
             System.exit(0);
         }
+    }
+
+    private void setIngredientsMenuActionListeners() {
+        form.getjMenuItemShowAllIngredients().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                panelCtrl = new ShowAllIngredientsPanelController(form, out, in);
+                form.setTitle("Show all ingredients");
+                panelCtrl.initPanel(new ShowAllIngredientsPanel());
+            }
+        });
     }
 
 }

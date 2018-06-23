@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.panel.category;
+package controller.panel.ingredient;
 
-import domain.RecipeCategory;
+import domain.Ingredient;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
@@ -14,18 +14,18 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Milos
  */
-public class CategoriesTableModel extends AbstractTableModel{
+public class IngredientsTableModel extends AbstractTableModel{
 
-    private List<RecipeCategory> categories;
+    private List<Ingredient> ingredients;
     private String searchTerm = "";
 
-    public CategoriesTableModel(List<RecipeCategory> categories) {
-        this.categories = categories;
+    public IngredientsTableModel(List<Ingredient> categories) {
+        this.ingredients = categories;
     }
     
     @Override
     public int getRowCount() {
-        return getVisibleCategories().size();
+        return getVisibleIngredients().size();
     }
 
     @Override
@@ -45,20 +45,20 @@ public class CategoriesTableModel extends AbstractTableModel{
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         if(columnIndex == 0) return (rowIndex + 1) + ".";
-        return getVisibleCategories().get(rowIndex);
+        return getVisibleIngredients().get(rowIndex);
     }
 
-    public List<RecipeCategory> getCategories() {
-        return categories;
+    public List<Ingredient> getIngredients() {
+        return ingredients;
     }
 
-    public void addCategory(RecipeCategory recipeCategory) {
-        categories.add(recipeCategory);
+    public void addIngredient(Ingredient ingredient) {
+        ingredients.add(ingredient);
         fireTableDataChanged();
     }
     
-    public void removeCategory(RecipeCategory category){
-        categories.remove(category);
+    public void removeIngredient(Ingredient ingredient){
+        ingredients.remove(ingredient);
         fireTableDataChanged();
     }
 
@@ -67,11 +67,11 @@ public class CategoriesTableModel extends AbstractTableModel{
         fireTableDataChanged();
     }
 
-    public List<RecipeCategory> getVisibleCategories() {
-        if(this.searchTerm.isEmpty()) return this.categories;
+    public List<Ingredient> getVisibleIngredients() {
+        if(this.searchTerm.isEmpty()) return this.ingredients;
         
-        return this.categories.stream()
-                .filter((RecipeCategory t) -> {
+        return this.ingredients.stream()
+                .filter((Ingredient t) -> {
                     return t.getName().toLowerCase().contains(this.searchTerm.toLowerCase());
                 }).collect(Collectors.toList());
     }

@@ -9,6 +9,7 @@ import domain.general.IDomainEntity;
 import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 /**
  *
@@ -113,6 +114,34 @@ public class IngredientOfRecipe implements IDomainEntity, Serializable{
     public String toString() {
         return ingredient + ": " + amount + " " + measureUnit;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final IngredientOfRecipe other = (IngredientOfRecipe) obj;
+        if (!Objects.equals(this.ingredient, other.ingredient)) {
+            return false;
+        }
+        if (!Objects.equals(this.measureUnit, other.measureUnit)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

@@ -104,12 +104,25 @@ public class AddNewRecipePanelController extends AbstractPanelController {
             Ingredient ingredient = (Ingredient) panel.getJcbIngredients().getSelectedItem();
             MeasureUnit unit = (MeasureUnit) panel.getJcbMeasureUnits().getSelectedItem();
             IngredientOfRecipe ior = new IngredientOfRecipe(0l, ingredient, quantity, unit);
-            recipe.getIngredients().add(ior);
+            if (recipe.getIngredients().contains(ior)) {
+                int option = JOptionPane.showConfirmDialog(panel,
+                        "The ingredient is already added. Do you want to add " + quantity + unit + " more to " + ingredient + "?");
+                if(option == JOptionPane.YES_OPTION){
+                    for (IngredientOfRecipe ingredient1 : recipe.getIngredients()) {
+                        if(ingredient1.equals(ior)){
+                            ingredient1.setAmount(ingredient1.getAmount() + ior.getAmount());
+                        }
+                    }
+                }else return;
+                
+            } else {
+                recipe.getIngredients().add(ior);
+            }
             rerenderIngredients();
         });
-        
+
         this.panel.getJbtnRemoveLastIngredient().addActionListener((e) -> {
-            if(recipe.getIngredients().size() != 0){
+            if (recipe.getIngredients().size() != 0) {
                 recipe.getIngredients().remove(recipe.getIngredients().size() - 1);
                 rerenderIngredients();
             }
@@ -127,10 +140,10 @@ public class AddNewRecipePanelController extends AbstractPanelController {
             recipe.getSteps().add(new RecipeStep(0l, 0l, text));
             rerenderSteps();
         });
-        
+
         this.panel.getJbtnRemoveLastStep().addActionListener((e) -> {
-            if(recipe.getSteps().size() != 0){
-                recipe.getSteps().remove(recipe.getSteps().size() -1);
+            if (recipe.getSteps().size() != 0) {
+                recipe.getSteps().remove(recipe.getSteps().size() - 1);
                 rerenderSteps();
             }
         });
@@ -205,7 +218,7 @@ public class AddNewRecipePanelController extends AbstractPanelController {
 
     private boolean validateRecipe() {
         String errors = "";
-        if(recipe.getTitle().isEmpty()){
+        if (recipe.getTitle().isEmpty()) {
             errors += "Title can't be empty.";
         }
         if (recipe.getSteps().size() == 0) {
