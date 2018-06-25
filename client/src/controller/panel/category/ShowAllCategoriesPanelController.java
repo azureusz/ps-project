@@ -114,8 +114,9 @@ public class ShowAllCategoriesPanelController extends AbstractPanelController {
                         if (ro.getCode() == IStatus.OK) {
                             tm.removeCategory(category);
                             panel.getJtxtSearchCategories().setText("");
+                            JOptionPane.showMessageDialog(panel, ro.getMessage());
                         } else {
-                            JOptionPane.showMessageDialog(panel, "You can't delete a category that contains some recipes.");
+                            JOptionPane.showMessageDialog(panel, "Can't delete recipe category. Check if it has some recipes.");
                         }
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "There was an error during server communication.");

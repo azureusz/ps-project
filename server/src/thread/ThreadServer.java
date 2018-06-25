@@ -44,12 +44,16 @@ public class ThreadServer extends Thread {
 
             }
         } catch (IOException ex) {
-            
+            System.out.println("Server stopped.");
         }
     }
 
     public void stopServer() throws IOException {
         serverSocket.close();
+        for (Thread client : clients) {
+            ThreadClient c = (ThreadClient)client;
+            c.getSocket().close();
+        }
     }
 
 }

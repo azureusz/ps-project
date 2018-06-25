@@ -168,7 +168,6 @@ public class AddNewRecipePanelController extends AbstractPanelController {
                 }
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(panel, "Could not load recipe categories from server.");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddNewRecipePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -185,7 +184,6 @@ public class AddNewRecipePanelController extends AbstractPanelController {
                 }
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(panel, "Could not load measure units from server.");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddNewRecipePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -202,7 +200,6 @@ public class AddNewRecipePanelController extends AbstractPanelController {
                 }
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(panel, "Could not load ingredients from server.");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AddNewRecipePanelController.class.getName()).log(Level.SEVERE, null, ex);
         }

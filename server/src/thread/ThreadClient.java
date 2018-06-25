@@ -40,19 +40,18 @@ import transfer.util.IStatus;
  */
 public class ThreadClient extends Thread {
 
-    Socket socket;
+    private Socket socket;
 
     public ThreadClient(Socket socket) {
         this.socket = socket;
     }
-
+    
     @Override
     public void run() {
         ObjectInputStream input = null;
         try {
-            input = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());
-            output.flush();
+            input = new ObjectInputStream(socket.getInputStream());
             while (!isInterrupted()) {
                 try {
 
@@ -228,6 +227,10 @@ public class ThreadClient extends Thread {
                 Logger.getLogger(ThreadClient.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public Socket getSocket() {
+        return socket;
     }
 
 }

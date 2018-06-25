@@ -113,8 +113,9 @@ public class ShowAllIngredientsPanelController extends AbstractPanelController {
                         if (ro.getCode() == IStatus.OK) {
                             tm.removeIngredient(ingredient);
                             panel.getJtxtSearchIngredients().setText("");
+                            JOptionPane.showMessageDialog(panel, ro.getMessage());
                         } else {
-                            JOptionPane.showMessageDialog(panel, "You can't delete a ingredient that is in some recipes.");
+                            JOptionPane.showMessageDialog(panel, "Can't delete ingredient. Check if it's in some recipes.");
                         }
                     } catch (Exception ex) {
                         JOptionPane.showMessageDialog(panel, "There was an error during server communication.");

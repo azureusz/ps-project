@@ -49,14 +49,16 @@ public class MainFormController {
     public void initForm() {
         try {
             connectToServer();
-            out = new ObjectOutputStream(session.Session.getInstance().getSocket().getOutputStream());
-            out.flush();
-            in = new ObjectInputStream(session.Session.getInstance().getSocket().getInputStream());
-            setActionListeners();
-            panelCtrl = new HomePanelController(form, out, in);
-            panelCtrl.initPanel(new HomePanel());
-            form.setTitle("Recipe management");
-            form.setVisible(true);
+            if (out == null && in == null) {
+                out = new ObjectOutputStream(session.Session.getInstance().getSocket().getOutputStream());
+                in = new ObjectInputStream(session.Session.getInstance().getSocket().getInputStream());
+
+                setActionListeners();
+                panelCtrl = new HomePanelController(form, out, in);
+                panelCtrl.initPanel(new HomePanel());
+                form.setTitle("Recipe management");
+                form.setVisible(true);
+            }
         } catch (IOException ex) {
             Logger.getLogger(MainFormController.class.getName()).log(Level.SEVERE, null, ex);
         }
